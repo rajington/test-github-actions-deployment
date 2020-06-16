@@ -12,13 +12,9 @@ jobs:
         uses: octokit/request-action@v2.x
         with:
           route: POST /repos/:repository/deployments
-          # mediaType: |
-          #   previews:
-          #     - ant-man
           repository: ${{ github.repository }}
           ref: ${{ github.sha }}
           environment: test
-          # transient_environment: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
