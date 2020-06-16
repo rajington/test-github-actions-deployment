@@ -14,7 +14,7 @@ jobs:
           route: POST /repos/:repository/deployments
           repository: ${{ github.repository }}
           ref: ${{ github.base_ref }}
-          environment: test
+          environment: ${{ github.sha }}
           required_contexts: "[]"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
