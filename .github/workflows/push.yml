@@ -13,7 +13,7 @@ jobs:
         with:
           route: POST /repos/:repository/deployments
           repository: ${{ github.repository }}
-          ref: ${{ github.base_ref }}
+          ref: ${{ github.sha }}
           environment: ${{ github.sha }}
           required_contexts: "[]"
         env:
