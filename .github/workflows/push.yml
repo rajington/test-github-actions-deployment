@@ -17,7 +17,7 @@ jobs:
           environment: ${{ github.sha }}
           required_contexts: "[]"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.NEW_TOKEN }}
 
       - name: Update Deployment
         if: always()
@@ -29,4 +29,4 @@ jobs:
           state: ${{ job.status }}
           environment_url: https://www.google.com
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.NEW_TOKEN }}
