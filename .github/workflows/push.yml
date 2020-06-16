@@ -19,7 +19,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - run: echo ${{ fromJson(steps.deployment.outputs.data) }}
+      - run: echo ${{ toJson(steps.deployment.outputs.data) }}
 
       - name: Update Deployment
         if: always()
