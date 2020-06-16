@@ -3,7 +3,7 @@ name: Push
 on: push
 
 jobs:
-  echo:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,13 +22,15 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - run: echo ${{ steps.deployment.outputs.data }}
+
       - name: Update Deployment
         if: always()
         uses: octokit/request-action@v2.x
         with:
           route: POST /repos/:repository/deployments/:deployment_id/statuses
           repository: ${{ github.repository }}
-          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+          deployment_id: ${{ fromJson(steps.deployment.outputs.data).id }}
           state: ${{ job.status }}
           environment_url: https://www.google.com
         env:
