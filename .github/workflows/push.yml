@@ -12,6 +12,9 @@ jobs:
         uses: octokit/request-action@v2.x
         with:
           route: POST /repos/:repository/deployments
+          mediaType: |
+            previews:
+              - ant-man
           repository: ${{ github.repository }}
           ref: ${{ github.sha }}
           environment: test
@@ -19,13 +22,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - run: echo ${{ toJson(fromJson(steps.deployment.outputs.data)) }}
-
       - name: Update Deployment
         if: always()
         uses: octokit/request-action@v2.x
         with:
           route: POST /repos/:repository/deployments/:deployment_id/statuses
+          mediaType: |
+            previews:
+              - ant-man
           repository: ${{ github.repository }}
           deployment_id: ${{ fromJson(steps.deployment.outputs.data).id }}
           state: ${{ job.status }}
