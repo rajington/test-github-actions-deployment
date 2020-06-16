@@ -1,0 +1,15 @@
+name: Deployment Status
+
+on: deployment_status
+
+jobs:
+  echo:
+    name: Dump Event
+    # needs: cache-dependencies
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
